@@ -1,0 +1,11 @@
+.top-dishes{
+    margin: 31px 51px;
+}
+
+.card-part{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+}
