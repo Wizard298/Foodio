@@ -27,8 +27,8 @@ function Explore1() {
         <div className="categories">
             <div className="categ">
                 <Link to="/pizza">
-                    <img src={img1} alt="Pizza" />
                     {/* 612 * 408 */}
+                    <img src={img1} alt="Pizza" />
                     <div className="categ-text">Pizza</div>
                 </Link>
             </div>

@@ -14,13 +14,13 @@ function Explore2() {
             <h1 className="explore-heading">
                 Explore More!
             </h1>
-            {/* <br />
+            <br />
             <p className="explore-para">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor debitis
                 cum delectus cumque, similique minima ratione, deserunt voluptas modi
                 exercitationem a reprehenderit, dignissimos possimus dolore voluptate
                 incidunt! Quae iusto modi ratione sequi, atque quam velit!
-            </p> */}
+            </p>
         </div>
         {/* <br /> */}
 

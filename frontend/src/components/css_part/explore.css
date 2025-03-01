@@ -15,7 +15,7 @@
 /* category part */
 .categories{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
 
 .categ{
@@ -53,9 +53,15 @@
     opacity: 1;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1500px){
+    .explore-para{
+        padding: 0;
+    }
+    
     .categories{
-        justify-content: center;
+        /* justify-content: center; */
+        overflow-x: scroll;
+        padding-bottom: 16px;
     }
 
     .categ{

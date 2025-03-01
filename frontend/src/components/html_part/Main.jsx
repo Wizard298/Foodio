@@ -27,7 +27,7 @@ function Main() {
         <br />
 
         <div className='top-dishes'>
-          <h1 style={{fontWeight: '500'}}>Top Dishes For You</h1>
+          <h1 style={{fontWeight: '500', fontSize: '2.4rem'}}>Top Dishes For You</h1>
           <div className='card-part'>
             {food.map(key => 
               <ProductCard

@@ -9,6 +9,7 @@ function Navbar() {
 
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  
 
   // if(location.pathname !== '/' || location.pathname !== '/home'){
     //   setScrolled(true);
@@ -28,19 +29,34 @@ function Navbar() {
       window.addEventListener('scroll', handleScroll);
     }
     
-    // window.addEventListener('scroll', handleScroll);
 
     return ()=>{
       window.removeEventListener('scroll', handleScroll);
     }
   }, [location.pathname]);
 
+  // if user clicks on the screen rather than icon
+  const [isOpen, setIsOpen] = useState(false);
   const handleResponsive = () => {
-    let getToggle = document.querySelector('.toggle1');
+    setIsOpen(!isOpen);
+  };
+  // const handleResponsive = () => {
+  //   let getToggle = document.querySelector('.toggle1');
 
-    getToggle.classList.toggle('toggle2');
-    console.log('success');
-  }
+  //   getToggle.classList.toggle('toggle2');
+  //   // console.log('success');
+  // }
+
+  useEffect(() => {
+    const closeMenu = (e) => {
+      if (!e.target.closest(".toggle-links") && !e.target.closest(".nav-size-icon")) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
+  }, []);
 
   return (
     <>
@@ -58,30 +74,41 @@ function Navbar() {
                     <h2 className='nav-logo-visible'>Foodio</h2>
                   </div>
 
-                  <div className='nav-login-visible'>
-                    <Link to="/login">Log In</Link>
-                  </div>
+                  <Link to="/login" className='nav-login-visible'>
+                    <div>
+                      Log In
+                    </div>
+                  </Link>
                 </div>
 
                 <div className="nav-logo-heading">
                   <h2>Foodio</h2>
                 </div>
 
-                <div className="toggle-links toggle1">
-                  <div className="nav-link nav-link-home">
-                    <Link to="/home">Home</Link>
-                  </div>
-                  <div className="nav-link">
-                    <a href="https://www.google.com">About Us</a>
-                  </div>
-                  <div className="nav-link">
-                    <a href="https://www.google.com">Services</a>
-                  </div>
-                  <div className="nav-link">
-                    <a href="https://www.google.com">Contact Us</a>
-                  </div>
+                {/* Toggle Menu */}
+                {/* <div className="toggle-links toggle1"> */}
+                <div className={`toggle-links toggle1 ${isOpen ? "toggle2" : ""}`}>
+                  <Link to="/home">
+                    <div className="nav-link nav-link-home">
+                      Home
+                    </div>
+                  </Link>
+                  <Link to="/home">
+                    <div className="nav-link">
+                      About Us
+                    </div>
+                  </Link>
+                  <Link to="/home">
+                    <div className="nav-link">
+                      Services
+                    </div>
+                  </Link>
+                  <Link to="/home">
+                    <div className="nav-link">
+                      Contact Us
+                    </div>
+                  </Link>
                 </div>
-
             </div>
 
             <div className="navbar-part-2">
@@ -89,16 +116,16 @@ function Navbar() {
                   <label htmlFor="search">Search </label>
                   <input type="search" />
                 </div>
-                <div className="nav-login">
-                  <Link to="/login">Log In</Link>
-                </div>
+                <Link to="/login">
+                  <div className="nav-login">
+                    Log In
+                  </div>
+                </Link>
             </div>
 
         </div>
 
       </header>
-
-      {/* <BgImg/> */}
       
     </>
   )
