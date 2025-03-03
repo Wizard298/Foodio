@@ -5,7 +5,16 @@
 .card-part{
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
+    justify-content: center;
     /* align-items: center; */
+    
+}
 
+@media screen and (max-width: 900px) {
+    .card-part{
+        justify-content: left;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        padding-bottom: 11px;
+    }
 }

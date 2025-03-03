@@ -15,13 +15,18 @@ import Sandwich from './components/html_part/Sandwich';
 import Chocolate from './components/html_part/Chocolate';
 import Noodles from './components/html_part/Noodles';
 import Rolls from './components/html_part/Rolls';
+import SignUp from './components/html_part/SignUp';
+import ForgotPassword from './components/html_part/ForgotPassword';
 
 function App() {
   const location = useLocation();
-  const renderNavFoot = location.pathname !== '/login';
+  const renderLogin = location.pathname !== '/login';
+  const renderSignUp = location.pathname !== '/signup';
+  const renderForgot = location.pathname !== '/forgot';
   return (
     <>
-      {renderNavFoot && <Navbar/>}
+      {/* {renderLogin && renderSignUp && renderForgot && <Navbar/>} */}
+      <Navbar/>
 
       <ScrollToTop/>
 
@@ -29,6 +34,8 @@ function App() {
           <Route path='/' element={<Main/>} />
           <Route path='/home' element={<Main/>} />
           <Route path='/login' element={<Login/>} />
+          <Route path='/signup' element={<SignUp/>} />
+          <Route path='/forgot' element={<ForgotPassword/>} />
           <Route path='/addToCart' element={<AddToCart/>} />
           <Route path='/pizza' element={<Pizza/>} />
           <Route path='/burger' element={<Burger/>} />
@@ -41,7 +48,7 @@ function App() {
         </Routes>
 
 
-      {renderNavFoot && <Footer/>}
+      {renderLogin && renderSignUp && renderForgot && <Footer/>}
     </>
   );
 }
