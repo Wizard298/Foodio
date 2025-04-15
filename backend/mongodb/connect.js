@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-// const dataBaseName = 'CapProject';
 const dataBaseName = 'Foodio';
 
 mongoose.connect(`mongodb://127.0.0.1:27017/${dataBaseName}`,{

@@ -23,7 +23,7 @@ function ForgotPassword() {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        if (!isStrongPassword(password)) {
+        if (isStrongPassword(password)) {
             toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!");
             return; 
         }
@@ -32,7 +32,7 @@ function ForgotPassword() {
           toast.warning("⚠️ Passwords do not match!"); 
         }
         else{
-            axios.post('http://localhost:3500/reset', { email, password})
+            axios.post('http://localhost:4500/reset', { email, password})
             .then((result) => {
                 if(result.data.message === "email"){
                   toast.info("📧 Email does not exists!");

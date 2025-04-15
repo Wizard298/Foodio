@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProductCard from './ProductCard.jsx';
-import { pasta } from '../jsonFiles/pasta.js';
+import { CartContext } from './Cart.jsx';
+// import { pasta } from '../jsonFiles/pasta.js';
 
 function Pasta() {
+    const {state} = useContext(CartContext);
+    const pasta = state.item.pasta;
   return (
     <>
         <h1>
@@ -10,12 +13,17 @@ function Pasta() {
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {pasta.map(key => 
+            {pasta.map(item => 
                 <ProductCard
-                    img = {key.img}
-                    name = {key.name}
-                    price = {key.price}
-                    description = {key.description}
+                    key = {item.id}
+                    id = {item.id}  
+                    img = {item.img}
+                    name = {item.name}
+                    price = {item.price}
+                    description = {item.description}
+                    quantity={item.quantity}
+                    category={item.category}
+                    cartAdded={item.cartAdded}
                 />
             )}
         </div>

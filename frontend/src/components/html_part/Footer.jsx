@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css_part/footer.css';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -10,33 +10,33 @@ function Footer() {
           <div className="footer-col">
             <h4>Info</h4>
             <ul className="links">
-              <li><a href="/home">Home</a></li>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/service">Services</a></li>
-              <li><a href="/contact">Contact Us</a></li>
-              <li><a href="/postjob">Post Job</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/">Services</Link></li>
+              <li><Link to="/">Contact Us</Link></li>
+              <li><Link to="/">Post Job</Link></li>
             </ul>
           </div>
           <div className="footer-col">
             <h4>Explore</h4>
             <ul className="links">
-              <li><a href="/home/webDeveloper">Web Developer</a></li>
-              <li><a href="/home/logoDesign">Logo Designs</a></li>
-              <li><a href="/home/graphicDesign">Graphic Design</a></li>
-              <li><a href="/home/webDeveloper">Web Design</a></li>
-              <li><a href="/home/appDeveloper">App Developer</a></li>
-              <li><a href="/home/dataScientist">Data Scientists</a></li>
+              <li><Link to="/webDeveloper">Web Developer</Link></li>
+              <li><Link to="/logoDesign">Logo Designs</Link></li>
+              <li><Link to="/graphicDesign">Graphic Design</Link></li>
+              <li><Link to="/webDeveloper">Web Design</Link></li>
+              <li><Link to="/appDeveloper">App Developer</Link></li>
+              <li><Link to="/dataScientist">Data Scientists</Link></li>
             </ul>
           </div>
           <div className="footer-col">
             <h4>Legal</h4>
             <ul className="links">
-              <li><a href="/home">Customer Agreement</a></li>
-              <li><a href="/home">Privacy Policy</a></li>
-              <li><a href="/home">GDPR</a></li>
-              <li><a href="/home">Security</a></li>
-              <li><a href="/home">Testimonials</a></li>
-              <li><a href="/home">Media Kit</a></li>
+              <li><Link to="/">Customer Agreement</Link></li>
+              <li><Link to="/">Privacy Policy</Link></li>
+              <li><Link to="/">GDPR</Link></li>
+              <li><Link to="/">Security</Link></li>
+              <li><Link to="/">Testimonials</Link></li>
+              <li><Link to="/">Media Kit</Link></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -46,7 +46,7 @@ function Footer() {
               of news, updates, helpful tips, and
               exclusive offers.
             </p>
-            <form action="/home">
+            <form action="/">
               <input type="text" placeholder="Your email" required/>
               <button type="submit">SUBSCRIBE</button>
             </form>

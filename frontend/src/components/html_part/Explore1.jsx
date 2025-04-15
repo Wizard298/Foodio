@@ -12,7 +12,7 @@ function Explore1() {
     <div className="explore">
         <div>
             <h1 className="explore-heading">
-                Explore Our Menu
+                Explore Our Services
             </h1>
             <br />
             <p className="explore-para">

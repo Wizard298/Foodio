@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProductCard from './ProductCard.jsx';
-import { sandwich } from '../jsonFiles/sandwich'
+import { CartContext } from './Cart.jsx';
+// import { sandwich } from '../jsonFiles/sandwich'
 
 function Sandwich() {
+    const {state} = useContext(CartContext);
+    const sandwich = state.item.sandwich;
   return (
     <>
         <h1>
@@ -10,12 +13,17 @@ function Sandwich() {
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {sandwich.map(key => 
+            {sandwich.map(item => 
                 <ProductCard
-                    img = {key.img}
-                    name = {key.name}
-                    price = {key.price}
-                    description = {key.description}
+                    key = {item.id}
+                    id = {item.id}  
+                    img = {item.img}
+                    name = {item.name}
+                    price = {item.price}
+                    description = {item.description}
+                    quantity={item.quantity}
+                    category={item.category}
+                    cartAdded={item.cartAdded}
                 />
             )}
         </div>

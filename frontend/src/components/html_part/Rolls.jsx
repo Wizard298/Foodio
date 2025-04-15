@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProductCard from './ProductCard.jsx';
-import { rolls } from '../jsonFiles/rolls.js'
+import { CartContext } from './Cart.jsx';
+// import { rolls } from '../jsonFiles/rolls.js'
 
 function Rolls() {
+    const {state} = useContext(CartContext);
+    const rolls = state.item.rolls;
   return (
     <>
         <h1>
@@ -10,12 +13,17 @@ function Rolls() {
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {rolls.map(key => 
+            {rolls.map(item => 
                 <ProductCard
-                    img = {key.img}
-                    name = {key.name}
-                    price = {key.price}
-                    description = {key.description}
+                    key = {item.id}
+                    id = {item.id}  
+                    img = {item.img}
+                    name = {item.name}
+                    price = {item.price}
+                    description = {item.description}
+                    quantity={item.quantity}
+                    category={item.category}
+                    cartAdded={item.cartAdded}
                 />
             )}
         </div>

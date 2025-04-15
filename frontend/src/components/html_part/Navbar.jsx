@@ -88,22 +88,22 @@ function Navbar() {
                 {/* Toggle Menu */}
                 {/* <div className="toggle-links toggle1"> */}
                 <div className={`toggle-links toggle1 ${isOpen ? "toggle2" : ""}`}>
-                  <Link to="/home">
+                  <Link to="/">
                     <div className="nav-link nav-link-home">
                       Home
                     </div>
                   </Link>
-                  <Link to="/home">
+                  <Link to="/about">
                     <div className="nav-link">
                       About Us
                     </div>
                   </Link>
-                  <Link to="/home">
+                  <Link to="/">
                     <div className="nav-link">
                       Services
                     </div>
                   </Link>
-                  <Link to="/home">
+                  <Link to="/">
                     <div className="nav-link">
                       Contact Us
                     </div>

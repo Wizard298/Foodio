@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProductCard from './ProductCard.jsx';
-import {cake} from '../jsonFiles/cake.js';
+import { CartContext } from './Cart.jsx';
+// import {cake} from '../jsonFiles/cake.js';
 
 function Cake() {
+    const {state} = useContext(CartContext);
+    const cake = state.item.cake;
+
   return (
     <>
         <h1>
@@ -10,12 +14,17 @@ function Cake() {
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {cake.map(key => 
+            {cake.map(item => 
                 <ProductCard
-                    img = {key.img}
-                    name = {key.name}
-                    price = {key.price}
-                    description = {key.description}
+                    key = {item.id}
+                    id = {item.id}  
+                    img = {item.img}
+                    name = {item.name}
+                    price = {item.price}
+                    description = {item.description}
+                    quantity={item.quantity}
+                    category={item.category}
+                    cartAdded={item.cartAdded}
                 />
             )}
         </div>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUp({ setIsModalOpen, setActiveForm }) {
+function SignUp() {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
@@ -24,14 +24,20 @@ function SignUp({ setIsModalOpen, setActiveForm }) {
     // ✅ Strong password validation function
     const isStrongPassword = (password) => {
         const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        return strongPasswordRegex.test(password);
+        // const result = strongPasswordRegex.test(password.trim());
+        const result = strongPasswordRegex.test(password);
+        console.log("Result: ", result);
+        return result;
     };
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log(password)
+        console.log(isStrongPassword(password))
+        
 
          // ✅ Check if password meets strength requirements
-         if (!isStrongPassword(password)) {
+         if (isStrongPassword(password)) {
             toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!");
             return; // Stop form submission
         }
@@ -44,7 +50,7 @@ function SignUp({ setIsModalOpen, setActiveForm }) {
         //     toast.warning("⚠️ Firstname and Lastname are same!");
         // }
         else{
-            axios.post('http://localhost:3500/register', {firstName, lastName, email, password})
+            axios.post('http://localhost:4500/register', {firstName, lastName, email, password})
             .then((result) => {
                 if(result.data.message === "email"){
                     toast.info("📧 Email already exists!");
@@ -58,7 +64,7 @@ function SignUp({ setIsModalOpen, setActiveForm }) {
                     // navigate('/login');
                     setTimeout(() => {
                         // setIsModalOpen(false)
-                        navigate('/home');
+                        navigate('/login');
                     }, 2500);
                 }
 

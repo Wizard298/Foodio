@@ -17,6 +17,8 @@ import Noodles from './components/html_part/Noodles';
 import Rolls from './components/html_part/Rolls';
 import SignUp from './components/html_part/SignUp';
 import ForgotPassword from './components/html_part/ForgotPassword';
+import AboutUs from './components/html_part/AboutUs';
+import Cart from './components/html_part/Cart';
 
 function App() {
   const location = useLocation();
@@ -31,20 +33,25 @@ function App() {
       <ScrollToTop/>
 
         <Routes>
-          <Route path='/' element={<Main/>} />
-          <Route path='/home' element={<Main/>} />
+          {/* <Route path='/' element={<Main/>} /> */}
+          <Route path='/' element={<Cart> <Main/> </Cart>} />
+          {/* <Route path='/home' element={<Main/>} /> */}
+          
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/forgot' element={<ForgotPassword/>} />
+          <Route path='/about' element={<AboutUs/>} />
           <Route path='/addToCart' element={<AddToCart/>} />
-          <Route path='/pizza' element={<Pizza/>} />
-          <Route path='/burger' element={<Burger/>} />
-          <Route path='/cake' element={<Cake/>} />
-          <Route path='/rolls' element={<Rolls/>} />
-          <Route path='/pasta' element={<Pasta/>} />
-          <Route path='/sandwich' element={<Sandwich/>} />
-          <Route path='/chocolate' element={<Chocolate/>} />
-          <Route path='/noodles' element={<Noodles/>} />
+
+          {/* <Route path='/pizza' element={<Pizza/>} /> */}
+          <Route path='/pizza' element={<Cart> <Pizza/> </Cart>} />
+          <Route path='/burger' element={ <Cart> <Burger/> </Cart>} />
+          <Route path='/cake' element={<Cart> <Cake/> </Cart>} />
+          <Route path='/rolls' element={<Cart> <Rolls/> </Cart>} />
+          <Route path='/pasta' element={<Cart> <Pasta/> </Cart>} />
+          <Route path='/chocolate' element={<Cart> <Chocolate/> </Cart>} />
+          <Route path='/noodles' element={<Cart> <Noodles/> </Cart>} />
+          <Route path='/sandwich' element={<Cart> <Sandwich/> </Cart>} />
         </Routes>
 
 

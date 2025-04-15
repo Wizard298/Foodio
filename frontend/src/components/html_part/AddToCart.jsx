@@ -20,11 +20,15 @@ function AddToCart() {
     //   }, [id]);
 
     const location = useLocation();
-    const {img, name, price, description} = location.state || {};
+    const {id, img, name, price, description, quantity, category, cartAdded} = location.state || {};
 
+    console.log(id)
     console.log(img)
     console.log(name)
     console.log(price)
+    console.log(quantity)
+    console.log(category)
+    console.log(cartAdded)
 
 
     // const editStyle ={

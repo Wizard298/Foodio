@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ProductCard from './ProductCard.jsx';
-import { chocolate } from '../jsonFiles/chocolate.js';
+import { CartContext } from './Cart.jsx';
+// import { chocolate } from '../jsonFiles/chocolate.js';
 
 function Chocolate() {
+    const {state} = useContext(CartContext);
+    const chocolate = state.item.chocolate;
   return (
     <>
         <h1>
@@ -10,12 +13,17 @@ function Chocolate() {
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {chocolate.map(key => 
+            {chocolate.map(item => 
                 <ProductCard
-                    img = {key.img}
-                    name = {key.name}
-                    price = {key.price}
-                    description = {key.description}
+                    key = {item.id}
+                    id = {item.id}  
+                    img = {item.img}
+                    name = {item.name}
+                    price = {item.price}
+                    description = {item.description}
+                    quantity={item.quantity}
+                    category={item.category}
+                    cartAdded={item.cartAdded}
                 />
             )}
         </div>

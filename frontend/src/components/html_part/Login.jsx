@@ -25,7 +25,7 @@ function Login() {
       e.preventDefault();
       // setLoading(true);
 
-      axios.post('http://localhost:3500/loginCheck', {email, password})
+      axios.post('http://localhost:4500/loginCheck', {email, password})
       .then((result) => {
           console.log(result.data.message);
 
@@ -36,7 +36,7 @@ function Login() {
             
             setTimeout(() => {
               // setIsModalOpen(false);
-              navigate('/home');
+              navigate('/');
               window.location.reload();
             }, 2500);  // Delay of 2 seconds (2000ms)
           }
