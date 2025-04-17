@@ -2,8 +2,7 @@ import React,  { useState } from 'react'
 import axios from 'axios';
 import '../css_part/signup.css'
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function SignUp() {
     const [firstName, setFirstName] = useState();
@@ -31,20 +30,21 @@ function SignUp() {
     };
 
     const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(password)
-        console.log(isStrongPassword(password))
-        
+        e.preventDefault();        
 
          // ✅ Check if password meets strength requirements
          if (isStrongPassword(password)) {
-            toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!");
+            toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!", {
+                toastId: "Weak Password"
+            });
             return; // Stop form submission
         }
 
 
         if(password !== confirmPassword){
-            toast.warning("⚠️ Passwords do not match!");
+            toast.warning("⚠️ Passwords do not match!", {
+                toastId: "Password-not-matching"
+            });
         }
         // else if(firstName === lastName){
         //     toast.warning("⚠️ Firstname and Lastname are same!");
@@ -53,17 +53,22 @@ function SignUp() {
             axios.post('http://localhost:4500/register', {firstName, lastName, email, password})
             .then((result) => {
                 if(result.data.message === "email"){
-                    toast.info("📧 Email already exists!");
+                    toast.info("📧 Email already exists!", {
+                        toastId: "Email-exists"
+                    });
                 }
                 else if(result.data.message === "password"){
-                    toast.warning("Password Updated to the existing email!")
+                    toast.warning("Password Updated to the existing email!", {
+                        toastId: "password-updated"
+                    })
                     navigate('/login');
                 }
                 else{
-                    toast.success("✅ Sign Up Successful! Redirecting to Login Page");
+                    toast.success("✅ Sign Up Successful! Redirecting to Login Page", {
+                        toastId: "SignUp-Success"
+                    });
                     // navigate('/login');
                     setTimeout(() => {
-                        // setIsModalOpen(false)
                         navigate('/login');
                     }, 2500);
                 }
@@ -76,21 +81,15 @@ function SignUp() {
 
   return (
     <>
-        <ToastContainer position="top-center" autoClose={7000} />
         <div className="signup-body">
             <div className="sign-up-container">
                 <div className="sign-up-form-container">
                     <div>
                         <div style={{display:'flex', justifyContent: 'space-between', alignItems:'center'}}>
                             <h1>Create New Account</h1>
-                            {/* <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="black" style={{cursor:'pointer'}} class="bi bi-x" viewBox="0 0 16 16" onClick={() => setIsModalOpen(false)}>
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </div> */}
                         </div>
 
-                        <p>Join millions of users taking notes on Freelancify</p>
+                        <p>Join millions of users taking notes on Foodio</p>
                     </div>
                     <form className='edit-form' onSubmit={handleSubmit}>
                         <input 
@@ -168,9 +167,6 @@ function SignUp() {
                     </div>
                 </div>
 
-                {/* <div className="signup-image">
-                    <img src="" alt="Error"/>
-                </div> */}
             </div>
         </div>
     </>

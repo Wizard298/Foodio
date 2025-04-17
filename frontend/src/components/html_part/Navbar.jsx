@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react'
 import '../css_part/navbar.css'
 import '../css_part/bgImg.css'
 import { Link, useLocation } from 'react-router-dom';
-// import BgImg from './BgImg';
+import { toast } from 'react-toastify';
 
-// function Navbar(props) {
+
 function Navbar() {
 
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  
+  const [user, setUser] = useState(null); // Store logged-in user info
 
-  // if(location.pathname !== '/' || location.pathname !== '/home'){
-    //   setScrolled(true);
-    // }
-    
-    // setScrolled(location.pathname !== '/')
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(JSON.parse(loggedInUser)); // Parse user data
+    }
+  }, []);
     
   useEffect(()=>{
     const handleScroll = () => {
@@ -29,11 +31,11 @@ function Navbar() {
       window.addEventListener('scroll', handleScroll);
     }
     
-
     return ()=>{
       window.removeEventListener('scroll', handleScroll);
     }
   }, [location.pathname]);
+
 
   // if user clicks on the screen rather than icon
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +60,17 @@ function Navbar() {
     return () => document.removeEventListener("click", closeMenu);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Clear user data
+    toast.success(" Logged Out Successfully!...", {
+      toastId: "logged-out-navbar"
+    });
+    setTimeout(() => {
+      setUser(null); // Reset state
+      window.location.reload(); // Refresh page to reflect changes
+    }, 2100);
+  };
+
   return (
     <>
       {/* Navbar Part */}
@@ -74,11 +87,40 @@ function Navbar() {
                     <h2 className='nav-logo-visible'>Foodio</h2>
                   </div>
 
-                  <Link to="/login" className='nav-login-visible'>
-                    <div>
-                      Log In
-                    </div>
-                  </Link>
+                  <div style={{display: 'flex', alignItems: "center", gap: "25px"}}>
+                    <Link to="/cartPage">
+                      <div style={{paddingTop: "2px"}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                      </div>
+                    </Link>
+
+                    {user?(
+                      <>
+                        <div className="dropdown">
+                          {/* <button class="dropbtn">Dropdown</button> */}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-circle profile-icon" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                          </svg>
+                          <div class="dropdown-content">
+                            <Link to="/profile" className='dropdown-profile'>View Profile</Link>
+                            <Link onClick={handleLogout}  className='dropdown-logout'>Log Out</Link>
+                          </div>
+                        </div>
+                      </>
+                      ) : (
+                      <>
+                        <Link to="/login">
+                          <div className="nav-login-visible" style={{fontSize: "18px"}}>
+                            Log In
+                          </div>
+                        </Link>
+                      </>
+                      )
+                    }
+                  </div>
                 </div>
 
                 <div className="nav-logo-heading">
@@ -116,11 +158,37 @@ function Navbar() {
                   <label htmlFor="search">Search </label>
                   <input type="search" />
                 </div>
-                <Link to="/login">
-                  <div className="nav-login">
-                    Log In
+                <Link to="/cartPage">
+                  <div style={{paddingTop: "2px"}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
                   </div>
                 </Link>
+                {user?(
+                  <>
+                    <div class="dropdown">
+                      {/* <button class="dropbtn">Dropdown</button> */}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-circle profile-icon" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                      </svg>
+                      <div class="dropdown-content">
+                        <Link to="/profile" className='dropdown-profile'>View Profile</Link>
+                        <Link onClick={handleLogout}  className='dropdown-logout'>Log Out</Link>
+                      </div>
+                    </div>
+                  </>
+                 ) : (
+                  <>
+                    <Link to="/login">
+                      <div className="nav-login" style={{fontSize: "18px"}}>
+                        Log In
+                      </div>
+                    </Link>
+                  </>
+                  )
+                }
             </div>
 
         </div>

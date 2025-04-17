@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import '../css_part/signup.css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 function ForgotPassword() {
     const [email, setEmail] = useState();
@@ -24,27 +23,35 @@ function ForgotPassword() {
         e.preventDefault();
 
         if (isStrongPassword(password)) {
-            toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!");
+            toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!", {
+                toastId: "weak-password"
+            });
             return; 
         }
 
         if(password !== confirmPassword){
-          toast.warning("⚠️ Passwords do not match!"); 
+          toast.warning("⚠️ Passwords do not match!", {
+            toastId: "password-not-matching-forgot"
+          }); 
         }
         else{
             axios.post('http://localhost:4500/reset', { email, password})
             .then((result) => {
                 if(result.data.message === "email"){
-                  toast.info("📧 Email does not exists!");
+                  toast.info("📧 Email does not exists!", {
+                    toastId: "email-not-exists-forgot"
+                  });
                 }
                 else if(result.data.message === "same"){
-                  toast.info("📧 Password is same for the existing email!");
+                  toast.info("📧 Password is same for the existing email!", {
+                    toastId: "password-same-forgot"
+                  });
                 }
                 else if(result.data.message === "password"){
-                    toast.success(" Password Updated!! Redirecting to Login Page!");
+                    toast.success(" Password Updated!! Redirecting to Login Page!", {
+                        toastId: "password-updated"
+                    });
                     setTimeout(() => {
-                        // setIsModalOpen(false);
-                        // setActiveForm('login');
                         navigate('/login');
                     }, 2500);
                 }
@@ -54,7 +61,6 @@ function ForgotPassword() {
     }
   return (
     <>
-      <ToastContainer position="top-center" autoClose={7000} />
       <div className="signup-body">
         <div class="sign-up-container">
             <div class="sign-up-form-container">

@@ -31,7 +31,7 @@ header{
 }
 .navbar-part-2{
     margin: 0px 21px;
-    gap: 51px;
+    gap: 35px;
 }
 
 
@@ -51,6 +51,69 @@ header{
 .nav-logo-visible, .nav-login-visible{
     display: none;
 }
+
+/* dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 23px;
+    /* background-color: #f1f1f1; */
+    background-color: white;
+    min-width: 116px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    box-shadow: 0px 0px 7px black;
+    /* border: 1px solid gray; */
+    border-radius: 11px;
+    z-index: 99;
+}
+
+.dropdown-content a {
+    /* border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-radius: 11px; */
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-profile{
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+}
+
+.dropdown-logout{
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    box-shadow: 0px 0px 1px black;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.profile-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-right: 7px;
+}
+
+/* dropdown menu */
+
+
+
 
 .nav-logo-heading{
     margin: 0px 18px;

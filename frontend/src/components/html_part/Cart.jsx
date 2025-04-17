@@ -10,6 +10,7 @@ import {sandwich} from '../jsonFiles/sandwich.js';
 import {food} from '../jsonFiles/food.js';
 
 import { reducer } from './Reducer.jsx';
+import { toast } from 'react-toastify';
 
 // Creating context 
 export const CartContext = createContext();
@@ -34,9 +35,18 @@ const initialState = {
 }
 
 function Cart({children}) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const isLoggedIn = !!user; // true if user exists
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const increment = (id, category) => {
+      if (!isLoggedIn){
+        toast.warning("You have to login first before purchasing!", {
+          toastId: "login-warning"
+        });
+        return;
+      }
       return dispatch({
           type: "INCREMENT",
           payload: id,
@@ -45,6 +55,12 @@ function Cart({children}) {
       }
       
     const decrement = (id, category) => {
+      if (!isLoggedIn){
+        toast.warning("You have to login first before purchasing!", {
+          toastId: "login-warning"
+        });
+        return;
+      }
       return dispatch({
           type: "DECREMENT",
           payload: id,
@@ -53,6 +69,12 @@ function Cart({children}) {
     }
 
     const addToCart = (id, category) => {
+      if (!isLoggedIn){
+        toast.warning("You have to login first before purchasing!", {
+          toastId: "login-warning"
+        });
+        return;
+      }
       return dispatch({
           type: "ADD_TO_CART",
           payload: id,

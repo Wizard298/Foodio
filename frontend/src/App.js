@@ -19,6 +19,9 @@ import SignUp from './components/html_part/SignUp';
 import ForgotPassword from './components/html_part/ForgotPassword';
 import AboutUs from './components/html_part/AboutUs';
 import Cart from './components/html_part/Cart';
+import Profile from './components/html_part/Profile';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const location = useLocation();
@@ -27,6 +30,7 @@ function App() {
   const renderForgot = location.pathname !== '/forgot';
   return (
     <>
+      <ToastContainer position="top-center" autoClose={5000} newestOnTop={true} />
       {/* {renderLogin && renderSignUp && renderForgot && <Navbar/>} */}
       <Navbar/>
 
@@ -40,6 +44,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/forgot' element={<ForgotPassword/>} />
+          <Route path='/profile' element={<Profile/>} />
           <Route path='/about' element={<AboutUs/>} />
           <Route path='/addToCart' element={<AddToCart/>} />
 
