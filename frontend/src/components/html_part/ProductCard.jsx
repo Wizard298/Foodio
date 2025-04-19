@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import '../css_part/productCard.css';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from './Cart';
+import { toast } from 'react-toastify';
 
 function ProductCard({id, img, name, price, description, quantity, category, cartAdded}) {
   const {increment, decrement, addToCart} = useContext(CartContext);
@@ -12,6 +13,16 @@ function ProductCard({id, img, name, price, description, quantity, category, car
   // const quantity = currentItem?.quantity || 1;
 
   const navigateInformation = () =>{
+    const user = JSON.parse(localStorage.getItem("user"));
+  
+    if (!user) {
+      // show a toast warning
+      toast.warning("You must be logged in to view details!", {
+        toastId: "auth-warning",
+      });
+      return;
+    }
+
     navigate('/addToCart', {
       state: {
         id: id,

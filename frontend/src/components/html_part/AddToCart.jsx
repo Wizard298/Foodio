@@ -1,42 +1,32 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import '../css_part/addToCart.css'
-// import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
+import { toast } from 'react-toastify';
+// import { CartContext } from './Cart';
 
 function AddToCart() {
-    // const [data, setData] = useState([]);
-    // const { id } = useParams();
-
-    // useEffect(() => {
-    //     axios
-    //       .get(`http://localhost:3500/allmedicines/${id}`)
-    //       .then((res) => {
-    //        // console.log(res.data.oneItem[0].name);
-    //         setData(res.data.oneItem[0]);
-    //       })
-    //       .catch((err) => console.log(err));
-    //   }, [id]);
-
     const location = useLocation();
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    if (!user) {
+      setTimeout(()=>{
+        toast.warning("You must be logged in to access that page!", {
+          toastId: "manual-visit"
+        });
+      }, 1)
+      return <Navigate to="/login" />;
+    }
+
     const {id, img, name, price, description, quantity, category, cartAdded} = location.state || {};
 
     console.log(id)
-    console.log(img)
-    console.log(name)
-    console.log(price)
-    console.log(quantity)
+    // console.log(img)
+    // console.log(name)
+    // console.log(price)
+    // console.log(quantity)
     console.log(category)
     console.log(cartAdded)
 
-
-    // const editStyle ={
-    //   width: "35vw",
-    //   padding: "13px",
-    //   fontSize: "18px",
-    //   marginTop: 51
-    // }
 
   return (
     <>
@@ -59,6 +49,10 @@ function AddToCart() {
           <div className="addcart-div-part2">
             <h3 className="addtocart-price">Rs. {price}</h3>
             <p className="addtocart-para">Inclusive of all taxes</p>
+            <br />
+
+            <h3>{`Quantity Added: ${quantity}`}</h3>
+            <br />
 
             <i>*This product cannot be returned for a refund or exchange</i>
             <br />
@@ -69,11 +63,13 @@ function AddToCart() {
             <i>*Delivery Changes if applicable will be applied at checkout</i>
             <br />
 
-            <button className="addToCart-button"
-              // style={editStyle}
-            >
-              Add to cart
-            </button>
+            {/* <button className="addToCart-button"> Add To Cart </button> */}
+            {cartAdded ? 
+            <button className="addToCart-button" style={{backgroundColor: "green"}}> Added To Cart</button>
+            :
+            <button className="addToCart-button" style={{backgroundColor: "red"}}> Not Added To Cart </button>
+            }
+            
           </div>
         </div>
       </div>

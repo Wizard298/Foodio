@@ -20,12 +20,12 @@ function Footer() {
           <div className="footer-col">
             <h4>Explore</h4>
             <ul className="links">
-              <li><Link to="/webDeveloper">Web Developer</Link></li>
-              <li><Link to="/logoDesign">Logo Designs</Link></li>
-              <li><Link to="/graphicDesign">Graphic Design</Link></li>
-              <li><Link to="/webDeveloper">Web Design</Link></li>
-              <li><Link to="/appDeveloper">App Developer</Link></li>
-              <li><Link to="/dataScientist">Data Scientists</Link></li>
+              <li><Link to="/pizza">Pizza</Link></li>
+              <li><Link to="/burger">Burger</Link></li>
+              <li><Link to="/cake">Cake</Link></li>
+              <li><Link to="/chocolate">Chocolate</Link></li>
+              <li><Link to="/pasta">Pasta</Link></li>
+              <li><Link to="/sandwich">Sandwich</Link></li>
             </ul>
           </div>
           <div className="footer-col">

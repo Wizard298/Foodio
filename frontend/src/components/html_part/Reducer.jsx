@@ -44,6 +44,21 @@ export const reducer = (state, action) => {
 
         return {...state, item:updatedItems};
     }
+
+    if(action.type === "CLEAR_CART"){
+        const clearedItems = {};
+        for(const category in state.item){
+            clearedItems[category] = state.item[category].map((curElem) => {
+                return {
+                    ...curElem,
+                    quantity: 1,
+                    cartAdded: false,
+                }
+            })
+        }
+
+        return {...state, item:clearedItems};
+    }
     
     return state;
 }

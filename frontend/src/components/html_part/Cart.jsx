@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import {burger} from '../jsonFiles/burger.js';
 import {cake} from '../jsonFiles/cake.js';
 import {chocolate} from '../jsonFiles/chocolate.js';
@@ -38,7 +38,18 @@ function Cart({children}) {
     const user = JSON.parse(localStorage.getItem("user"));
     const isLoggedIn = !!user; // true if user exists
 
-    const [state, dispatch] = useReducer(reducer, initialState);
+    // const [state, dispatch] = useReducer(reducer, initialState);
+    // Load initial cart from localStorage if exists
+    const savedCartState = JSON.parse(localStorage.getItem(`cart_${user?.email}`)) || initialState;
+    const [state, dispatch] = useReducer(reducer, savedCartState);
+
+    // Save to localStorage on cart updates
+    useEffect(() => {
+      if (isLoggedIn) {
+        localStorage.setItem(`cart_${user.email}`, JSON.stringify(state));
+      }
+    }, [state, isLoggedIn, user?.email]);
+
 
     const increment = (id, category) => {
       if (!isLoggedIn){
@@ -82,9 +93,15 @@ function Cart({children}) {
       });
     }
 
+    const clearCart = () => {
+      return dispatch({
+          type: "CLEAR_CART"
+      });
+    }
+
   return (
     <>
-      <CartContext.Provider value={{ state, increment, decrement, addToCart}}>
+      <CartContext.Provider value={{ state, increment, decrement, addToCart, clearCart}}>
         {children}
       </CartContext.Provider>
 

@@ -22,6 +22,7 @@ import Cart from './components/html_part/Cart';
 import Profile from './components/html_part/Profile';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CartPage from './components/html_part/CartPage';
 
 function App() {
   const location = useLocation();
@@ -46,7 +47,6 @@ function App() {
           <Route path='/forgot' element={<ForgotPassword/>} />
           <Route path='/profile' element={<Profile/>} />
           <Route path='/about' element={<AboutUs/>} />
-          <Route path='/addToCart' element={<AddToCart/>} />
 
           {/* <Route path='/pizza' element={<Pizza/>} /> */}
           <Route path='/pizza' element={<Cart> <Pizza/> </Cart>} />
@@ -57,6 +57,8 @@ function App() {
           <Route path='/chocolate' element={<Cart> <Chocolate/> </Cart>} />
           <Route path='/noodles' element={<Cart> <Noodles/> </Cart>} />
           <Route path='/sandwich' element={<Cart> <Sandwich/> </Cart>} />
+          <Route path='/addToCart' element={<Cart> <AddToCart/> </Cart> } />
+          <Route path='/cartPage' element={ <Cart> <CartPage/> </Cart> } />
         </Routes>
 
 
