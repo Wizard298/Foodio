@@ -1,0 +1,128 @@
+.cart-page {
+  padding: 2rem 0rem;
+  /* padding: 2rem 3rem; */
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-link{
+  background-color: white;
+  margin: 32px 0px;
+  width: 29em;
+  padding: 21px 8px;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 1em;
+  text-align: center;
+}
+
+.cart-link-heading{
+  font-size: 2.5em;
+  font-weight:normal;
+  margin-bottom: 11px;
+}
+
+.link-cart-buttn{
+  padding: 8px 21px;
+  cursor: pointer;
+  font-size: 1.2em;
+  background: white;
+  border: none;
+  box-shadow: 0px 0px 7px black;
+  margin: 16px;
+  border-radius: 18px;
+}
+
+.link-cart-buttn:hover{
+  background-color: black;
+  color: white;
+
+}
+
+.cart-page-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.cart-page-table th, .cart-page-table td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.cart-page-table th{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+
+.cart-page-quantity-minus, .cart-page-quantity-plus{
+    background-color: #5f5f5f;
+    background-color: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 500;
+    width: 31px;
+    height: 31px;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.cart-page-quantity-minus{
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.cart-page-quantity-plus{
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.cart-page-quantity-minus:hover, .cart-page-quantity-plus:hover{
+  background-color: #353535;
+}
+
+.cart-page-btn button{
+  padding: 13px 16px;
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px black;
+}
+
+.cart-page-btn button:hover{
+  opacity: 0.8;
+}
+
+.cart-page-continue{
+  background-color: rgb(18, 219, 219);
+}
+
+.cart-page-payment{
+  background: transparent;
+  box-shadow: 0px 0px 5px black !important;
+  font-weight: 500;
+  /* border: 1px solid black !important; */
+}
+
+.cart-page-delete-btn{
+  background-color: rgb(234, 11, 11);
+  color: white;
+}
+
+.cart-page-delete-btn:hover{
+  opacity: 0.8;
+}
+
+.cart-page-summary{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+  

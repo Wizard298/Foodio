@@ -1,0 +1,247 @@
+/* Navbar Part */
+header{
+    padding: 13px 0px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.header-default{
+    background-color: transparent;
+    color: white;
+}
+
+.header-scroll{
+    /* background-color: red; */
+    /* background-color: white; */
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    box-shadow: 0px 0px 7px black;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-part-1, .navbar-part-2{
+    display: flex;
+    align-items: center;
+}
+.navbar-part-2{
+    margin: 0px 21px;
+    gap: 35px;
+}
+
+
+.nav-logo{
+    /* display: flex; */
+    display: none;
+    margin: 0px 16px;
+}
+
+.nav-size-icon{
+    width: 35px; 
+    height: 35px;
+    cursor: pointer;
+}
+
+
+.nav-logo-visible, .nav-login-visible{
+    display: none;
+}
+
+/* dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 23px;
+    /* background-color: #f1f1f1; */
+    background-color: white;
+    min-width: 116px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    box-shadow: 0px 0px 7px black;
+    /* border: 1px solid gray; */
+    border-radius: 11px;
+    z-index: 99;
+}
+
+.dropdown-content a {
+    /* border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-radius: 11px; */
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-profile{
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+}
+
+.dropdown-logout{
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    box-shadow: 0px 0px 1px black;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.profile-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-right: 7px;
+}
+
+/* dropdown menu */
+
+
+
+
+.nav-logo-heading{
+    margin: 0px 18px;
+}
+
+.toggle-links{
+    display: flex;
+    margin: 0px 31px;
+    gap: 67px;
+}
+
+/* .nav-search{
+    margin: 0px 31px;
+} */
+
+.nav-link{
+    font-size: 1.1rem;
+}
+.nav-link:hover{
+    color: rgb(215, 202, 202);
+}
+
+.nav-login{
+    font-size: 1.1rem;
+    /* margin: 0px 16px; */
+}
+.nav-login:hover{
+    color: rgb(215, 202, 202);
+}
+
+/* ----------------------------------------------- */
+/* Responsiveness */
+@media screen and (max-width: 1016px) {
+    header{
+        padding: 0;
+    }    
+    
+    .nav-logo{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 0px;
+        background-color: transparent;
+        /* border-bottom: 1px solid white; */
+        /* box-shadow: 0px 0px 5px black; */
+    }
+    
+    .navbar-part-1, .toggle-links {
+        display: block;
+        width: 100%;
+    }
+
+    .responsive-logo-edit{
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-logo-heading{
+        display: none;
+    }
+
+    .nav-logo-visible, .nav-login-visible{
+        display: block;
+    }
+    .nav-login-visible:hover{
+        color: rgb(215, 202, 202);
+    }
+    
+    .nav-logo-visible{
+        display: inline-block;
+        margin: 0px 13px;
+    }
+
+    .nav-link {
+        margin: 0;
+        padding: 11px 0px;
+        /* border-bottom: 1px solid black; */
+        box-shadow: 0px 0px 2px black;
+        text-align: center;
+        background-color: white;
+    }
+
+    .nav-link:hover{
+        background-color: rgb(215, 202, 202);
+        color: black;
+    }
+
+
+    /* .nav-link a{
+        font-weight: 510;
+    } */
+
+    .nav-size-icon{
+        background-color: none;
+    }
+
+    .toggle-links{
+        margin: 0;
+    }
+    .toggle1{
+        /* visibility: hidden; */
+        height: 0px;
+        display: none;
+        transition: all .5s;
+    }
+    
+    .toggle2{
+        /* visibility: visible; */
+        /* height: 178px; */
+        display: block;
+        transition: all .5s;
+        /* background-color: white; */
+        color: black;
+    }
+
+
+    .navbar-part-2{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 235px) {
+    .nav-logo{
+        margin: 0;
+    }
+
+    .nav-login-visible{
+        display: none;
+    }
+}
+
