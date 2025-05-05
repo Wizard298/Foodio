@@ -26,8 +26,7 @@ const itemRoute = require('./routes/items.route');
 const app = express();
 module.exports = app;
 
-// Creating Middleware
-app.use(express.json());
+
 // ✅ CORS Configuration (Allow Frontend Access)
 // app.use(cors());
 app.use(cors({
@@ -35,14 +34,15 @@ app.use(cors({
         'http://localhost:3000',  // ✅ Added React Frontend URL
         'https://foodio11.netlify.app/',
     ],
-    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    // credentials: true, // ✅ important if you use cookies or tokens
 }));
 
 // Add this right after CORS setup to handle preflight requests
-app.options('*', cors()); // Enable preflight for all routes
-
+// app.options('*', cors()); // Enable preflight for all routes
+// Creating Middleware
+app.use(express.json());
 
 
 app.get('/', (req, res) => {
