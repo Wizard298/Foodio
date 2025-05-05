@@ -31,19 +31,26 @@ module.exports = app;
 // app.use(cors());
 app.use(cors({
     origin: [
-        'http://localhost:3000',  // ✅ Added React Frontend URL
-        'https://foodio11.netlify.app',
+        'http://localhost:3000',
+        'https://foodio11.netlify.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-    // credentials: true, // ✅ important if you use cookies or tokens
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Add this right after CORS setup to handle preflight requests
-app.options('*', cors()); // Enable preflight for all routes
+app.options('*', cors());
+
 // Creating Middleware
 app.use(express.json());
 
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    console.log(`[${req.method}] ${req.path} from ${req.headers.origin}`);
+    next();
+});
+  
 
 app.get('/', (req, res) => {
     res.send('<h1> Backend has been created successfully for freelancify website! \n Now go to /allLogins </h1>');
