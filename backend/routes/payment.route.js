@@ -91,8 +91,8 @@ app.post('/create-checkout-session', async (req, res) => {
       metadata: {
         orderId: existingOrder._id.toString(), // You can retrieve it later from webhook
       },
-      success_url: 'http://localhost:3000/success',
-      cancel_url: 'http://localhost:3000/cancel',
+      success_url: `${process.env.CLIENT_URL}/success`,
+      cancel_url: `${process.env.CLIENT_URL}/cancel`,
     });
 
     res.json({ id: session.id });
