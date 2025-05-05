@@ -12,9 +12,8 @@ function Footer() {
             <ul className="links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/">Services</Link></li>
+              <li><Link to="/myOrder">My Orders</Link></li>
               <li><Link to="/">Contact Us</Link></li>
-              <li><Link to="/">Post Job</Link></li>
             </ul>
           </div>
           <div className="footer-col">

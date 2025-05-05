@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
-const dataBaseName = 'Foodio';
+// const MongodbUrl = `mongodb://127.0.0.1:27017/Foodio`;
 
-mongoose.connect(`mongodb://127.0.0.1:27017/${dataBaseName}`,{
+const MongodbUrl = process.env.MONGODB_URL;
+
+
+mongoose.connect(MongodbUrl,{
     // useNewUrlParser: true,
     // useCreateIndex: true,
     // useUnifiedTopology: true

@@ -58,14 +58,20 @@ const Proceed = () => {
         <h2>Delivery Information</h2>
         <form>
           <div className="row">
-            <input type="text" placeholder="Username" value={user && user.username} />
+            <input 
+              type="text" 
+              placeholder="Username" 
+              value={user && user.username} 
+              readOnly
+            />
           </div>
           <input 
             type="email"
             value={user && user.email} 
             placeholder="Email address"
             onChange={(e)=>setEmail(e.target.value)} 
-            required
+            readOnly
+            // required
           />
           <input type="text" placeholder="Street" />
           <div className="row">
