@@ -55,7 +55,7 @@ function Cart({children}) {
     useEffect(() => {
       const fetchDynamicItems = async () => {
         try {
-          const res = await axios.get('http://localhost:4500/foods'); // adjust route as per your backend
+          const res = await axios.get(`${process.env.REACT_BACKEND_URL}/foods`); // adjust route as per your backend
           const data = res.data; // array of food items
     
           // Group by category

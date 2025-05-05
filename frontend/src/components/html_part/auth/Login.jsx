@@ -19,7 +19,7 @@ function Login() {
       e.preventDefault();
       // setLoading(true);
 
-      axios.post('http://localhost:4500/loginCheck', {email, password})
+      axios.post(`${process.env.REACT_BACKEND_URL}/loginCheck`, {email, password})
       .then((result) => {
           console.log(result.data.message);
 

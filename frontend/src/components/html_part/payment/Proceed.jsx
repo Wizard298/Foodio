@@ -40,7 +40,7 @@ const Proceed = () => {
     const stripe = await stripePromise;
 
     const response = await fetch(
-      "http://localhost:4500/payment/create-checkout-session",
+      `${process.env.REACT_BACKEND_URL}/payment/create-checkout-session`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

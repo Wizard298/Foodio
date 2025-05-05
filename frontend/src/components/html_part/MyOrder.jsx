@@ -8,7 +8,7 @@ const MyOrder = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(`http://localhost:4500/my-orders/${user.email}`);
+        const res = await fetch(`${process.env.REACT_BACKEND_URL}/my-orders/${user.email}`);
         const data = await res.json();
         setOrders(data);
       } catch (err) {
@@ -25,7 +25,7 @@ const MyOrder = () => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      const res = await fetch(`http://localhost:4500/my-orders/${orderId}`, {
+      const res = await fetch(`${process.env.REACT_BACKEND_URL}/my-orders/${orderId}`, {
         method: 'DELETE',
       });
 

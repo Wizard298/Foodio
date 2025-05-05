@@ -48,8 +48,8 @@ function SignUp() {
             });
         }
         else{
-            // axios.post('http://localhost:4500/register', {firstName, lastName, email, password})
-            axios.post('http://localhost:4500/register', {username, email, password})
+            // axios.post(`${process.env.REACT_BACKEND_URL}/register`, {firstName, lastName, email, password})
+            axios.post(`${process.env.REACT_BACKEND_URL}/register`, {username, email, password})
             .then((result) => {
                 if(result.data.message === "email"){
                     toast.info("📧 Email already exists!", {
