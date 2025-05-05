@@ -16,6 +16,7 @@ const Proceed = () => {
     if (loggedInUser) {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
+      setEmail(parsedUser.email);
     } else {
       navigate("/");
     }
@@ -69,7 +70,7 @@ const Proceed = () => {
             type="email"
             value={user && user.email} 
             placeholder="Email address"
-            onChange={(e)=>setEmail(e.target.value)} 
+            // onChange={(e)=>setEmail(e.target.value)} 
             readOnly
             // required
           />

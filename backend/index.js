@@ -42,14 +42,6 @@ app.options('*', cors());
 
 // Creating Middleware
 app.use(express.json());
-
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    console.log(`[${req.method}] ${req.path} from ${req.headers.origin}`);
-    next();
-});
   
 
 app.get('/', (req, res) => {

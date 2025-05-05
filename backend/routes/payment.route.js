@@ -89,7 +89,7 @@ app.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       customer_email: email,
       metadata: {
-        orderId: newOrder._id.toString(), // You can retrieve it later from webhook
+        orderId: existingOrder._id.toString(), // You can retrieve it later from webhook
       },
       success_url: 'http://localhost:3000/success',
       cancel_url: 'http://localhost:3000/cancel',
