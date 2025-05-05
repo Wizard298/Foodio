@@ -7,7 +7,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_BACKEND_URL}/admin/orders`);
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/orders`);
         const data = await res.json();
         setOrders(data);
       } catch (err) {
@@ -57,7 +57,7 @@ const OrderPage = () => {
                       const newStatus = e.target.value;
                       try {
                         const res = await fetch(
-                          `${process.env.REACT_BACKEND_URL}/admin/orders/${order._id}/status`,
+                          `${process.env.REACT_APP_BACKEND_URL}/admin/orders/${order._id}/status`,
                           {
                             method: "PUT",
                             headers: {

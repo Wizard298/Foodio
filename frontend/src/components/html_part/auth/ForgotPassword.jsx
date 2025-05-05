@@ -35,7 +35,7 @@ function ForgotPassword() {
           }); 
         }
         else{
-            axios.post(`${process.env.REACT_BACKEND_URL}/reset`, { email, password})
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/reset`, { email, password})
             .then((result) => {
                 if(result.data.message === "email"){
                   toast.info("📧 Email does not exists!", {

@@ -18,7 +18,7 @@ const AddFood = () => {
     };
     
     try {
-      const response = await fetch(`${process.env.REACT_BACKEND_URL}/add-item`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add-item`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

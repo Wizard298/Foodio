@@ -6,14 +6,14 @@ const Success = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`${process.env.REACT_BACKEND_URL}/payment/success?email=${email}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/success?email=${email}`)
       .then((res) => res.json())
       .then((data) => setOrders(data))
       .catch((err) => console.error(err));
   }, [email]);
 
   const handleDelete = async (orderId) => {
-    await fetch(`${process.env.REACT_BACKEND_URL}/payment/order/${orderId}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/order/${orderId}`, {
       method: "DELETE",
     });
 

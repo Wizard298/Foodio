@@ -19,7 +19,7 @@ function Login() {
       e.preventDefault();
       // setLoading(true);
 
-      axios.post(`${process.env.REACT_BACKEND_URL}/loginCheck`, {email, password})
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/loginCheck`, {email, password})
       .then((result) => {
           console.log(result.data.message);
 
