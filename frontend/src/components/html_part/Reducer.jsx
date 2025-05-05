@@ -59,6 +59,30 @@ export const reducer = (state, action) => {
 
         return {...state, item:clearedItems};
     }
+
+
+    // to add data dynamically
+
+    if (action.type === "SET_ITEMS") {
+        const mergedItems = { ...state.item };
+    
+        for (const category in action.data) {
+            const existingItems = mergedItems[category] || [];
+    
+            // Avoid duplicates based on _id
+            const newItems = action.data[category].filter(
+                newItem => !existingItems.some(existing => existing._id === newItem._id)
+            );
+    
+            mergedItems[category] = [...existingItems, ...newItems];
+        }
+    
+        return {
+            ...state,
+            item: mergedItems,
+        };
+    }
+    
     
     return state;
 }

@@ -5,8 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function SignUp() {
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
+    // const [firstName, setFirstName] = useState();
+    // const [lastName, setLastName] = useState();
+    const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,7 +34,7 @@ function SignUp() {
         e.preventDefault();        
 
          // ✅ Check if password meets strength requirements
-         if (isStrongPassword(password)) {
+         if (!isStrongPassword(password)) {
             toast.error("❌ Weak Password! Must contains 1 uppercase, 1 lowercase, 1 number & 1 special character!", {
                 toastId: "Weak Password"
             });
@@ -46,11 +47,9 @@ function SignUp() {
                 toastId: "Password-not-matching"
             });
         }
-        // else if(firstName === lastName){
-        //     toast.warning("⚠️ Firstname and Lastname are same!");
-        // }
         else{
-            axios.post('http://localhost:4500/register', {firstName, lastName, email, password})
+            // axios.post('http://localhost:4500/register', {firstName, lastName, email, password})
+            axios.post('http://localhost:4500/register', {username, email, password})
             .then((result) => {
                 if(result.data.message === "email"){
                     toast.info("📧 Email already exists!", {
@@ -67,7 +66,7 @@ function SignUp() {
                     toast.success("✅ Sign Up Successful! Redirecting to Login Page", {
                         toastId: "SignUp-Success"
                     });
-                    // navigate('/login');
+                    
                     setTimeout(() => {
                         navigate('/login');
                     }, 2500);
@@ -94,6 +93,15 @@ function SignUp() {
                     <form className='edit-form' onSubmit={handleSubmit}>
                         <input 
                             type="text" 
+                            name="signUpUsername" 
+                            placeholder="Username" 
+                            minLength="3" 
+                            maxLength="16"
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                        {/* <input 
+                            type="text" 
                             name="signUpFirstName" 
                             placeholder="First Name" 
                             minLength="3" 
@@ -107,7 +115,7 @@ function SignUp() {
                             placeholder="Last Name" 
                             onChange={(e) => setLastName(e.target.value)}
                             required 
-                        />
+                        /> */}
                         <input 
                             type="email" 
                             name="signUpEmail"

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import ProductCard from './ProductCard.jsx';
-import { CartContext } from './Cart.jsx';
+import ProductCard from '../ProductCard.jsx';
+import { CartContext } from '../Cart.jsx';
 // import {cake} from '../jsonFiles/cake.js';
 
 function Cake() {

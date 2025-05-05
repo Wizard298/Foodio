@@ -10,6 +10,7 @@ import {sandwich} from '../jsonFiles/sandwich.js';
 import {food} from '../jsonFiles/food.js';
 
 import { reducer } from './Reducer.jsx';
+import axios from 'axios'
 import { toast } from 'react-toastify';
 
 // Creating context 
@@ -38,10 +39,10 @@ function Cart({children}) {
     const user = JSON.parse(localStorage.getItem("user"));
     const isLoggedIn = !!user; // true if user exists
 
-    // const [state, dispatch] = useReducer(reducer, initialState);
     // Load initial cart from localStorage if exists
     const savedCartState = JSON.parse(localStorage.getItem(`cart_${user?.email}`)) || initialState;
     const [state, dispatch] = useReducer(reducer, savedCartState);
+    // const [state, dispatch] = useReducer(reducer, initialState);
 
     // Save to localStorage on cart updates
     useEffect(() => {
@@ -49,6 +50,33 @@ function Cart({children}) {
         localStorage.setItem(`cart_${user.email}`, JSON.stringify(state));
       }
     }, [state, isLoggedIn, user?.email]);
+
+
+    useEffect(() => {
+      const fetchDynamicItems = async () => {
+        try {
+          const res = await axios.get('http://localhost:4500/foods'); // adjust route as per your backend
+          const data = res.data; // array of food items
+    
+          // Group by category
+          const newFood = {};
+          data.forEach(item => {
+            if (!newFood[item.category]) {
+              newFood[item.category] = [];
+            }
+            newFood[item.category].push(item);
+          });
+    
+          // Dispatch the grouped data to the reducer
+          dispatch({ type: 'SET_ITEMS', data: newFood });
+    
+        } catch (err) {
+          console.error('Error fetching dynamic items:', err);
+        }
+      };
+    
+      fetchDynamicItems();
+    }, []);
 
 
     const increment = (id, category) => {
@@ -59,11 +87,11 @@ function Cart({children}) {
         return;
       }
       return dispatch({
-          type: "INCREMENT",
-          payload: id,
-          category: category,
-        });
-      }
+        type: "INCREMENT",
+        payload: id,
+        category: category,
+      });
+    }
       
     const decrement = (id, category) => {
       if (!isLoggedIn){

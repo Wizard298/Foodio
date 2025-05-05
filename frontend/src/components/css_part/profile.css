@@ -3,7 +3,7 @@
 
 .profile-div{
     display: flex;
-    margin-top: 31px;
+    margin: 48px 0px;
 }
 /* Sidenav */
 .profile-sidenav {
@@ -48,19 +48,19 @@
     width: 60%;
 }
 
-.url a {
+.profile-link {
     color: #818181;
     display: block;
     font-size: 20px;
     margin: 10px 0;
     padding: 6px 8px;
     text-decoration: none;
+    color: #000;
 }
 
-.url a:hover, .url .active {
+.url .active {
     background-color: #e8f5ff;
     border-radius: 28px;
-    color: #000;
     margin-left: 17%;
     width: 65%;
 }
@@ -88,6 +88,7 @@
 }
 
 /* End */
+
 
 /* Main */
 .profile-main {
@@ -125,41 +126,4 @@
     position: absolute;
     color: #e7e7e8;
     right: 14%;
-}
-
-.social-media {
-    text-align: center;
-    width: 90%;
-}
-
-.social-media span {
-    margin: 0 10px;
-}
-
-.fa-facebook:hover {
-    color: #4267b3 !important;
-}
-
-.fa-twitter:hover {
-    color: #1da1f2 !important;
-}
-
-.fa-instagram:hover {
-    color: #ce2b94 !important;
-}
-
-.fa-invision:hover {
-    color: #f83263 !important;
-}
-
-.fa-github:hover {
-    color: #161414 !important;
-}
-
-.fa-whatsapp:hover {
-    color: #25d366 !important;
-}
-
-.fa-snapchat:hover {
-    color: #fffb01 !important;
 }

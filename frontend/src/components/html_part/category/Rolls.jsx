@@ -1,19 +1,19 @@
 import React, { useContext } from 'react'
-import ProductCard from './ProductCard.jsx';
-import { CartContext } from './Cart.jsx';
-// import { sandwich } from '../jsonFiles/sandwich'
+import ProductCard from '../ProductCard.jsx';
+import { CartContext } from '../Cart.jsx';
+// import { rolls } from '../jsonFiles/rolls.js'
 
-function Sandwich() {
+function Rolls() {
     const {state} = useContext(CartContext);
-    const sandwich = state.item.sandwich;
+    const rolls = state.item.rolls;
   return (
     <>
         <h1>
-            This is Sandwich Page
+            This is Rolls Page
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {sandwich.map(item => 
+            {rolls.map(item => 
                 <ProductCard
                     key = {item.id}
                     id = {item.id}  
@@ -31,4 +31,4 @@ function Sandwich() {
   )
 }
 
-export default Sandwich
+export default Rolls

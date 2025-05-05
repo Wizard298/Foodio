@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import '../css_part/main.css';
+import '../css_part/bgImg.css'
 import BgImg from './BgImg'
 import ProductCard from './ProductCard'
 // import { food } from '../jsonFiles/food.js'
@@ -11,6 +12,7 @@ import { CartContext } from './Cart.jsx';
 
 function Main() {
   const {state} = useContext(CartContext);
+  console.log(state.item)
   const food = state.item.food;
 
   useEffect(()=>{
@@ -43,7 +45,7 @@ function Main() {
                 category={item.category}
                 cartAdded={item.cartAdded}
               />
-              )}
+            )}
           </div>
         </div>
         

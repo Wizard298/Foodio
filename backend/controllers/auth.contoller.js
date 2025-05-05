@@ -1,5 +1,5 @@
 const signupModel = require('../models/signupMod')
-const loginModel = require('../models/loginMod')
+// const loginModel = require('../models/loginMod')
 
 
 // get all logins details
@@ -16,11 +16,13 @@ const authAllLogins = async (req, res) => {
 
 // register
 const authRegister = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    // const { firstName, lastName, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     const existingUser = await signupModel.findOne({ email });
     if (existingUser) {
-        if (existingUser.firstName === firstName && existingUser.lastName === lastName && existingUser.password !== password) {
+        // if (existingUser.firstName === firstName && existingUser.lastName === lastName && existingUser.password !== password) {
+        if (existingUser.username === username && existingUser.password !== password) {
             existingUser.password = password; // Update the password
             await existingUser.save();
             res.json({
@@ -34,12 +36,14 @@ const authRegister = async (req, res) => {
         }
     }
     else {
-        signupModel.create({ firstName, lastName, email, password })
+        // signupModel.create({ firstName, lastName, email, password })
+        signupModel.create({ username, email, password })
             .then(data => res.json({
                 message: "User registered successfully!",
                 user: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
+                    // firstName: data.firstName,
+                    // lastName: data.lastName,
+                    username: data.username,
                     email: data.email,
                     password: data.password
                 }
@@ -60,8 +64,9 @@ const authLoginCheck = async (req, res) => {
                     res.json({
                         message: "Login successfull!",
                         user: {
-                            firstName: user.firstName,
-                            lastName: user.lastName,
+                            // firstName: user.firstName,
+                            // lastName: user.lastName,
+                            username: user.username,
                             email: user.email,
                             password: user.password
                         }

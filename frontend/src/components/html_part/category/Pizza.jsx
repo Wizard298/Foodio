@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '../ProductCard.jsx';
 // import {pizza} from '../jsonFiles/pizza.js';
-import { CartContext } from './Cart.jsx';
+import { CartContext } from '../Cart.jsx';
 
 function Pizza() {
   const {state} = useContext(CartContext);

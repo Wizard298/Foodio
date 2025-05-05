@@ -1,11 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../css_part/cartPage.css";
 import { CartContext } from "./Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CartPage() {
-  const { state, increment, decrement, addToCart, clearCart } =
-    useContext(CartContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const parsedUser = JSON.parse(loggedInUser);
+      if (parsedUser.username === "admin" && parsedUser.email === "admin456@gmail.com") {
+        toast.warning("Admin cannot go to cartPage!", {
+          toastId: "admin-warning"
+        })
+        navigate("/");
+      }
+    }
+  }, [navigate]);
+
+  const { state, increment, decrement, addToCart, clearCart } = useContext(CartContext);
 
   // Flatten all categories into one array and filter only cart items
   const cartItems = Object.values(state.item)
@@ -14,10 +28,7 @@ function CartPage() {
 
   // Calculate total quantity and amount
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const totalAmount = cartItems.reduce(
-    (sum, item) => sum + item.quantity * item.price,
-    0
-  );
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
   return (
     <div className="cart-page">
@@ -114,7 +125,7 @@ function CartPage() {
             <Link to="/" style={{ marginLeft: "5%" }}>
               <button className="cart-page-continue">Continue Shopping</button>
             </Link>
-            <Link to="/order">
+            <Link to="/proceed">
               <button className="cart-page-payment">Proceed To Checkout</button>
             </Link>
             <button

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../css_part/navbar.css'
-import '../css_part/bgImg.css'
 import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -42,12 +41,6 @@ function Navbar() {
   const handleResponsive = () => {
     setIsOpen(!isOpen);
   };
-  // const handleResponsive = () => {
-  //   let getToggle = document.querySelector('.toggle1');
-
-  //   getToggle.classList.toggle('toggle2');
-  //   // console.log('success');
-  // }
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -60,8 +53,11 @@ function Navbar() {
     return () => document.removeEventListener("click", closeMenu);
   }, []);
 
+
   const handleLogout = () => {
     localStorage.removeItem("user"); // Clear user data
+    // localStorage.removeItem(`cart_${user.email}`)
+
     toast.success(" Logged Out Successfully!...", {
       toastId: "logged-out-navbar"
     });
@@ -71,9 +67,10 @@ function Navbar() {
     }, 2100);
   };
 
+  const checkUser = user && user.username === "admin" &&  user.email === "admin456@gmail.com"
+
   return (
     <>
-      {/* Navbar Part */}
       <header className={`${scrolled? 'header-scroll': 'header-default'}`}>
         <div className="navbar">
 
@@ -109,7 +106,15 @@ function Navbar() {
                           </svg>
                           <div className="dropdown-content">
                             <Link to="/profile" className='dropdown-profile'>View Profile</Link>
-                            <Link onClick={handleLogout}  className='dropdown-logout'>Log Out</Link>
+                            {(checkUser)? (
+                              <>
+                                <Link to="/admin/addFood" className='dropdown-logout'>Add Items</Link>
+                                <Link to="/admin/orders" className='dropdown-logout'>View Orders</Link>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            <Link onClick={handleLogout}  className='dropdown-logout dropdown-radius'>Log Out</Link>
                           </div>
                         </div>
                       </>
@@ -143,9 +148,9 @@ function Navbar() {
                       About Us
                     </div>
                   </Link>
-                  <Link to="/">
+                  <Link to="/myOrder">
                     <div className="nav-link">
-                      Services
+                      My Orders
                     </div>
                   </Link>
                   <Link to="/">
@@ -162,7 +167,7 @@ function Navbar() {
                   <input type="search" />
                 </div>
                 <Link to="/cartPage">
-                {/* <div>
+                    {/* <div>
                       <sup>{'3'}</sup>
                     </div> */}
                   <div style={{paddingTop: "2px"}}>
@@ -181,7 +186,15 @@ function Navbar() {
                       </svg>
                       <div className="dropdown-content">
                         <Link to="/profile" className='dropdown-profile'>View Profile</Link>
-                        <Link onClick={handleLogout}  className='dropdown-logout'>Log Out</Link>
+                        {(checkUser)? (
+                          <>
+                            <Link to="/admin/addFood" className='dropdown-logout'>Add Items</Link>
+                            <Link to="/admin/orders" className='dropdown-logout'>View Orders</Link>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                        <Link onClick={handleLogout}  className='dropdown-logout dropdown-radius'>Log Out</Link>
                       </div>
                     </div>
                   </>

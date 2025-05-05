@@ -1,19 +1,19 @@
 import React, { useContext } from 'react'
-import ProductCard from './ProductCard.jsx';
-import { CartContext } from './Cart.jsx';
-// import { noodles } from '../jsonFiles/noodles.js';
+import ProductCard from '../ProductCard.jsx';
+import { CartContext } from '../Cart.jsx';
+// import { pasta } from '../jsonFiles/pasta.js';
 
-function Noodles() {
+function Pasta() {
     const {state} = useContext(CartContext);
-    const noodles = state.item.noodles;
+    const pasta = state.item.pasta;
   return (
     <>
         <h1>
-            This is Noodles Page
+            This is Pasta Page
         </h1>
 
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            {noodles.map(item => 
+            {pasta.map(item => 
                 <ProductCard
                     key = {item.id}
                     id = {item.id}  
@@ -31,4 +31,4 @@ function Noodles() {
   )
 }
 
-export default Noodles
+export default Pasta

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '../ProductCard.jsx';
 // import {burger} from '../jsonFiles/burger.js';
-import { CartContext } from './Cart.jsx';
+import { CartContext } from '../Cart.jsx';
 
 function Burger() {
   const {state} = useContext(CartContext);

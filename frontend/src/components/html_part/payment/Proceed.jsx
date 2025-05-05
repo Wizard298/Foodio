@@ -1,10 +1,26 @@
-import React, { useContext } from "react";
-import "../css_part/order.css";
-import { CartContext } from "./Cart";
+import React, { useContext, useState, useEffect } from "react";
+import "../../css_part/order.css";
+import { CartContext } from "../Cart";
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
 
-const Order = () => {
+const Proceed = () => {
+  const navigate = useNavigate();
+  
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState(null);
+
   const { state } = useContext(CartContext);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const parsedUser = JSON.parse(loggedInUser);
+      setUser(parsedUser);
+    } else {
+      navigate("/");
+    }
+  }, [navigate]);
+
   // Flatten cart items from all categories
   const cartItems = Object.values(state.item)
     .flat()
@@ -12,11 +28,15 @@ const Order = () => {
 
   //   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
-
-
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
+  // payment logic
   const handleCheckout = async () => {
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email address before proceeding.");
+      return;
+    }
+    
     const stripe = await stripePromise;
 
     const response = await fetch(
@@ -24,7 +44,7 @@ const Order = () => {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems }),
+        body: JSON.stringify({ cartItems, email, totalAmount }),
       }
     );
 
@@ -38,10 +58,15 @@ const Order = () => {
         <h2>Delivery Information</h2>
         <form>
           <div className="row">
-            <input type="text" placeholder="First name" />
-            <input type="text" placeholder="Last name" />
+            <input type="text" placeholder="Username" value={user && user.username} />
           </div>
-          <input type="email" placeholder="Email address" />
+          <input 
+            type="email"
+            value={user && user.email} 
+            placeholder="Email address"
+            onChange={(e)=>setEmail(e.target.value)} 
+            required
+          />
           <input type="text" placeholder="Street" />
           <div className="row">
             <input type="text" placeholder="City" />
@@ -80,4 +105,4 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default Proceed;
