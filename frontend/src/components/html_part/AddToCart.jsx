@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 function AddToCart() {
     const location = useLocation();
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("foodio_user"));
     
     if (!user) {
       setTimeout(()=>{

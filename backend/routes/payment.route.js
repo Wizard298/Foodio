@@ -36,7 +36,7 @@ const Order = require('../models/orderMod')
 // });
 
 app.post('/create-checkout-session', async (req, res) => {
-  const { cartItems, email, totalAmount } = req.body;
+  const { cartItems, email } = req.body;
 
   const line_items = cartItems.map(item => ({
     price_data: {
@@ -45,7 +45,7 @@ app.post('/create-checkout-session', async (req, res) => {
         name: item.name,
         images: [item.img],
       },
-      unit_amount: item.price * 100,
+      unit_amount: Math.round(item.price * 100),
     },
     quantity: item.quantity,
   }));
@@ -53,44 +53,44 @@ app.post('/create-checkout-session', async (req, res) => {
 
   try {
     // 🔍 Check if an order exists for the email and is still in 'placed' status
-    let existingOrder = await Order.findOne({ userEmail: email, status: "placed" });
+    // let existingOrder = await Order.findOne({ userEmail: email, status: "placed" });
 
-    if (existingOrder) {
-      // ✅ Merge the cart items and update totalAmount
-      // existingOrder.cartItems.push(...cartItems);
-      cartItems.forEach(newItem => {
-        const existingItem = existingOrder.cartItems.find(
-          item => item.name === newItem.name // or use a unique `item._id` if available
-        );
+    // if (existingOrder) {
+    //   // ✅ Merge the cart items and update totalAmount
+    //   // existingOrder.cartItems.push(...cartItems);
+    //   cartItems.forEach(newItem => {
+    //     const existingItem = existingOrder.cartItems.find(
+    //       item => item.name === newItem.name // or use a unique `item._id` if available
+    //     );
 
-        if (existingItem) {
-          existingItem.quantity += newItem.quantity;
-        } else {
-          existingOrder.cartItems.push(newItem);
-        }
-      });
+    //     if (existingItem) {
+    //       existingItem.quantity += newItem.quantity;
+    //     } else {
+    //       existingOrder.cartItems.push(newItem);
+    //     }
+    //   });
       
-      existingOrder.totalAmount += totalAmount;
-      await existingOrder.save();
-    } else {
-      // ✅ Create a new order
-      existingOrder = new Order({
-        userEmail: email,
-        cartItems,
-        totalAmount,
-        status: "placed",
-      });
-      await existingOrder.save();
-    }
+    //   existingOrder.totalAmount += totalAmount;
+    //   await existingOrder.save();
+    // } else {
+    //   // ✅ Create a new order
+    //   existingOrder = new Order({
+    //     userEmail: email,
+    //     cartItems,
+    //     totalAmount,
+    //     status: "placed",
+    //   });
+    //   await existingOrder.save();
+    // }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
       customer_email: email,
-      metadata: {
-        orderId: existingOrder._id.toString(), // You can retrieve it later from webhook
-      },
+      // metadata: {
+      //   orderId: existingOrder._id.toString(), // You can retrieve it later from webhook
+      // },
       success_url: `${process.env.CLIENT_URL}/success`,
       cancel_url: `${process.env.CLIENT_URL}/cancel`,
     });
@@ -114,6 +114,28 @@ app.get('/success', async (req, res) => {
     res.status(500).send("Error fetching orders");
   }
 });
+
+
+// Save order only after successful payment
+app.post('/save-order', async (req, res) => {
+  const { email, cartItems, totalAmount } = req.body;
+
+  try {
+      const order = new Order({
+          userEmail: email,
+          cartItems,
+          totalAmount,
+          status: "placed",
+      });
+
+      await order.save();
+      res.status(201).send("Order saved successfully");
+  } catch (err) {
+      console.error(err);
+      res.status(500).send("Failed to save order");
+  }
+});
+
 
 
 app.delete('/order/:id', async (req, res) => {

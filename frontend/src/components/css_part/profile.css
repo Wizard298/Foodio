@@ -3,8 +3,11 @@
 
 .profile-div{
     display: flex;
+    justify-content: center;
     margin: 48px 0px;
+    flex-wrap: wrap;
 }
+
 /* Sidenav */
 .profile-sidenav {
     background-color: #fff;
@@ -13,7 +16,9 @@
     height: 86%;
     overflow-x: hidden;
     padding-top: 20px;
-    width: 40%;
+    /* width: 40%; */
+    width: 46rem;
+    margin-bottom: 85px;
 }
 
 .profile {
@@ -72,8 +77,8 @@
 }
 
 .profile-logout-button button{
-    padding: 12px;
-    width: 35%;
+    padding: 12px 25px;
+    /* width: 35%; */
     border-radius: 11px;
     border: none;
     background-color: rgb(253, 43, 43);
@@ -96,7 +101,8 @@
     margin-left: 29%; */
     font-size: 28px;
     padding: 0 10px;
-    width: 52%;
+    width: 40rem;
+    /* margin-top: 65px; */
 }
 
 .profile-main h2 {

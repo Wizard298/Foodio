@@ -19,7 +19,7 @@ require('./mongodb/connect');
 // importing routes
 const authRoute = require('./routes/auth.route')
 const paymentRoute = require('./routes/payment.route');
-const webhookRoute = require('./routes/webhook.route');
+// const webhookRoute = require('./routes/webhook.route');
 const itemRoute = require('./routes/items.route');
 
 
@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/', authRoute);
 app.use('/payment', paymentRoute);
-app.use('/webhook', webhookRoute);
+// app.use('/webhook', webhookRoute);
 app.use('/', itemRoute); // add food item dynamically
 
 
@@ -84,7 +84,8 @@ app.get('/my-orders/:email', async (req, res) => {
         const email = req.params.email;
         const orders = await Order.find({ userEmail: email }).sort({ createdAt: -1 });
         res.json(orders);
-    } catch (err) {
+    } 
+    catch (err) {
         console.error('Failed to fetch user orders:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
@@ -97,7 +98,8 @@ app.delete('/my-orders/:orderId', async (req, res) => {
         const deletedOrder = await Order.findByIdAndDelete(orderId);
         if (!deletedOrder) return res.status(404).json({ message: 'Order not found' });
         res.json({ message: 'Order deleted successfully' });
-    } catch (err) {
+    } 
+    catch (err) {
         res.status(500).json({ error: 'Failed to delete order' });
     }
 });

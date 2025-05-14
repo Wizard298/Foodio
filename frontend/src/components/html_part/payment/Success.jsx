@@ -1,45 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../Cart";
 
 const Success = () => {
-  const [orders, setOrders] = useState([]);
-  const user = JSON.parse(localStorage.getItem("user"));
-  const email = user?.email;
+  // const [orders, setOrders] = useState([]);
+  const { state, clearCart } = useContext(CartContext);
+  // const user = JSON.parse(localStorage.getItem("foodio_user"));
+  // const email = user?.email;
+
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/success?email=${email}`)
+  //     .then((res) => res.json())
+  //     // .then((data) => setOrders(data))
+  //     .catch((err) => console.error(err));
+  // }, [email]);
+
+  // const handleDelete = async (orderId) => {
+  //   await fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/order/${orderId}`, {
+  //     method: "DELETE",
+  //   });
+
+  //   // Update UI
+  //   setOrders(orders.filter(order => order._id !== orderId));
+  // };
+
+  const hasSaved = useRef(false); // <-- This persists across renders
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/success?email=${email}`)
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
-      .catch((err) => console.error(err));
-  }, [email]);
+    const storedUser = localStorage.getItem("foodio_user");
+    const email = storedUser ? JSON.parse(storedUser).email : null;
 
-  const handleDelete = async (orderId) => {
-    await fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/order/${orderId}`, {
-      method: "DELETE",
-    });
+    // Flatten cart items from all categories
+    const cartItems = Object.values(state.item)
+      .flat()
+      .filter((item) => item.cartAdded);
 
-    // Update UI
-    setOrders(orders.filter(order => order._id !== orderId));
-  };
+    const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+
+    if (cartItems.length && email && !hasSaved.current) {
+      hasSaved.current = true; // Mark it saved
+
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/payment/save-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, cartItems, totalAmount }),
+      })
+        .then((res) => res.text())
+        .then((msg) => console.log(msg));
+
+      clearCart();
+    }
+
+    localStorage.removeItem("foodio_isCheckoutInProgress");
+  }, [clearCart, state.item]);
 
   return (
     <div className="success-page">
-      <h2>🎉 Order Placed Successfully!</h2>
-      {orders.map((order) => (
-        <div key={order._id} className="order-card">
-          <h3>Status: {order.status}</h3>
-          <ul>
-            {order.cartItems.map((item, index) => (
-              <li key={index}>
-                {item.quantity} × {item.name} - ₹{item.price}
-              </li>
-            ))}
-          </ul>
-          <p>Total: ₹{order.totalAmount}</p>
-          {order.status === "completed" && (
-            <button onClick={() => handleDelete(order._id)}>🗑 Delete Order</button>
-          )}
-        </div>
-      ))}
+      <h2>Payment Successful!</h2>
+      <p>🎉 Order Placed Successfully!</p>
+      <br />
+      <Link to="/myOrder">
+        <button>View Orders</button>
+      </Link>
     </div>
   );
 };

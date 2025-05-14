@@ -3,6 +3,7 @@ import "../../css_part/order.css";
 import { CartContext } from "../Cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Proceed = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Proceed = () => {
 
   const { state } = useContext(CartContext);
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem("foodio_user");
     if (loggedInUser) {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
@@ -29,14 +30,32 @@ const Proceed = () => {
 
   //   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+
+  useEffect(() => {
+    const isCheckoutInProgress = localStorage.getItem("foodio_isCheckoutInProgress");
+    const isOnCartPage = window.location.pathname === "/proceed";
+  
+    if (isCheckoutInProgress && isOnCartPage) {
+      // alert("You returned without completing the payment!");
+      toast.error("You returned without completing the payment!", {
+        toastId: "payment-return-cancel"
+      });
+      setTimeout(()=>{
+        localStorage.removeItem("foodio_isCheckoutInProgress");
+      }, 3000)
+    }
+  }, []);
+
+
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
   // payment logic
   const handleCheckout = async () => {
-    if (!email || !email.includes("@")) {
-      alert("Please enter a valid email address before proceeding.");
-      return;
-    }
+    // if (!email || !email.includes("@")) {
+    //   alert("Please enter a valid email address before proceeding.");
+    //   return;
+    // }
     
     const stripe = await stripePromise;
 
@@ -50,6 +69,9 @@ const Proceed = () => {
     );
 
     const session = await response.json();
+
+    localStorage.setItem("foodio_isCheckoutInProgress", "true");
+
     stripe.redirectToCheckout({ sessionId: session.id });
   };
 

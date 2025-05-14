@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 function CartPage() {
   const navigate = useNavigate();
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem("foodio_user");
     if (loggedInUser) {
       const parsedUser = JSON.parse(loggedInUser);
       if (parsedUser.username === "admin" && parsedUser.email === "admin456@gmail.com") {

@@ -13,7 +13,7 @@ function ProductCard({id, img, name, price, description, quantity, category, car
   // const quantity = currentItem?.quantity || 1;
 
   const navigateInformation = () =>{
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("foodio_user"));
   
     if (!user) {
       // show a toast warning

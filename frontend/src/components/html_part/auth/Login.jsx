@@ -28,7 +28,7 @@ function Login() {
               toastId: "login-success"
             });
 
-            localStorage.setItem("user", JSON.stringify(result.data.user));
+            localStorage.setItem("foodio_user", JSON.stringify(result.data.user));
             
             setTimeout(() => {
               navigate('/');

@@ -12,7 +12,7 @@ function Navbar() {
 
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem("foodio_user");
     if (loggedInUser) {
       setUser(JSON.parse(loggedInUser)); // Parse user data
     }
@@ -55,8 +55,8 @@ function Navbar() {
 
 
   const handleLogout = () => {
-    localStorage.removeItem("user"); // Clear user data
-    // localStorage.removeItem(`cart_${user.email}`)
+    localStorage.removeItem("foodio_user"); // Clear user data
+    // localStorage.removeItem(`foodio_cart_${user.email}`)
 
     toast.success(" Logged Out Successfully!...", {
       toastId: "logged-out-navbar"

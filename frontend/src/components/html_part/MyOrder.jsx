@@ -3,7 +3,7 @@ import '../css_part/myOrder.css'; // Custom CSS
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('foodio_user'));
 
   useEffect(() => {
     const fetchOrders = async () => {

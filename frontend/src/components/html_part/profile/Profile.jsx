@@ -9,7 +9,7 @@ function Profile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
+        const loggedInUser = localStorage.getItem("foodio_user");
         if (loggedInUser) {
             setUser(JSON.parse(loggedInUser));
         } 
@@ -112,4 +112,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default Profile;

@@ -36,18 +36,18 @@ const initialState = {
 }
 
 function Cart({children}) {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("foodio_user"));
     const isLoggedIn = !!user; // true if user exists
 
     // Load initial cart from localStorage if exists
-    const savedCartState = JSON.parse(localStorage.getItem(`cart_${user?.email}`)) || initialState;
+    const savedCartState = JSON.parse(localStorage.getItem(`foodio_cart_${user?.email}`)) || initialState;
     const [state, dispatch] = useReducer(reducer, savedCartState);
     // const [state, dispatch] = useReducer(reducer, initialState);
 
     // Save to localStorage on cart updates
     useEffect(() => {
       if (isLoggedIn) {
-        localStorage.setItem(`cart_${user.email}`, JSON.stringify(state));
+        localStorage.setItem(`foodio_cart_${user.email}`, JSON.stringify(state));
       }
     }, [state, isLoggedIn, user?.email]);
 

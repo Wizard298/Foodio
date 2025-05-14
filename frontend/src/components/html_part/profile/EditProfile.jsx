@@ -15,7 +15,7 @@ function EditProfile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem("foodio_user");
     if (loggedInUser) {
       const parsedUser = JSON.parse(loggedInUser);
       setUser(parsedUser);
