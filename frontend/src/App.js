@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/html_part/Navbar';
@@ -35,17 +35,20 @@ import AddFood from './components/html_part/admin/AddFood';
 import OrderPage from './components/html_part/admin/OrderPage';
 import MyOrder from './components/html_part/MyOrder';
 import EditProfile from './components/html_part/profile/EditProfile';
+import Browse from './components/html_part/Browse';
 
 function App() {
   const location = useLocation();
   const renderLogin = location.pathname !== '/login';
   const renderSignUp = location.pathname !== '/signup';
   const renderForgot = location.pathname !== '/forgot';
+
+  const [searchQuery, setSearchQuery] = useState('');
   return (
     <>
       <ToastContainer position="top-center" autoClose={5000} newestOnTop={true} />
       {/* {renderLogin && renderSignUp && renderForgot && <Navbar/>} */}
-      <Navbar/>
+      <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
 
       <ScrollToTop/>
 
@@ -56,6 +59,7 @@ function App() {
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/forgot' element={<ForgotPassword/>} />
           <Route path='/about' element={<AboutUs/>} />
+          <Route path='/browse' element={<Browse searchQuery={searchQuery} />} />
 
           <Route path='/profile' element={<Profile/>} />
           <Route path='/editProfile' element={<EditProfile/>} />

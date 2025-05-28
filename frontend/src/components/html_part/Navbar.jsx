@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import '../css_part/navbar.css'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
-function Navbar() {
+function Navbar({searchQuery, setSearchQuery}) {
 
   const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState(null); // Store logged-in user info
+
+  const handleKeyDown = (e) => {
+    if(e.key === 'Enter' && searchQuery.trim() !== ''){
+      navigate('/browse');
+    }
+  }
 
 
   useEffect(() => {
@@ -164,7 +171,13 @@ function Navbar() {
             <div className="navbar-part-2">
                 <div className="nav-search">
                   <label htmlFor="search">Search </label>
-                  <input type="search" />
+                  <input 
+                    style={{ padding: "3px 16px", borderRadius: "5px"}}
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                  />
                 </div>
                 <Link to="/cartPage">
                     {/* <div>

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import "../../css_part/order.css";
+import "../../css_part/proceed.css";
 import { CartContext } from "../Cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
@@ -79,29 +79,30 @@ const Proceed = () => {
     <div className="order-container">
       <div className="delivery-form">
         <h2>Delivery Information</h2>
+        
         <form>
-          <div className="row">
+          <div className="procced-row">
             <input 
               type="text" 
-              placeholder="Username" 
+              placeholder="Username"
+              className="proceed-username" 
               value={user && user.username} 
               readOnly
-            />
+              />
           </div>
           <input 
             type="email"
             value={user && user.email} 
+            className="proceed-email" 
             placeholder="Email address"
-            // onChange={(e)=>setEmail(e.target.value)} 
             readOnly
-            // required
           />
           <input type="text" placeholder="Street" />
-          <div className="row">
+          <div className="procced-row">
             <input type="text" placeholder="City" />
             <input type="text" placeholder="State" />
           </div>
-          <div className="row">
+          <div className="procced-row">
             <input type="text" placeholder="Zip code" />
             <input type="text" placeholder="Country" />
           </div>

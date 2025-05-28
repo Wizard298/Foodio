@@ -1,59 +1,176 @@
 .my-orders-container {
-    padding: 2rem;
-    max-width: 90%;
-    margin: auto;
-    font-family: Arial, sans-serif;
+  padding: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.my-orders-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.orders-table-container {
+  overflow-x: auto;
+  /* box-shadow: 0px 0px 2px black; */
+}
+
+.orders-table {
+  width: 100%;
+  /* border-collapse: collapse; */
+  background-color: white;
+  /* border: 1px solid black; */
+  /* min-width: 600px; Minimum width before scrolling */
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.orders-table th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.orders-table ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  /* .orders-table {
+    display: block;
+    width: 100%; */
+    /* display: flex;
+    justify-content: center; */
+  /* } */
+
+  .orders-table thead {
+    display: none;
   }
-  
-  .my-orders-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+
+  .orders-table tr {
+    display: block;
+    margin-top: 1px;
+    /* border: 1px solid #ddd; */
+    box-shadow: 0px 0px 3px black;
+    border-radius: 11px;
+    padding: 16px 21px;
+    margin-bottom: 31px;
   }
-  
-  .orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .orders-table th,
+
   .orders-table td {
-    padding: 12px 16px;
-    /* border-bottom: 1px solid #ddd; */
-    border: 1px solid #ddd;
-    text-align: left;
-    vertical-align: top;
-  }
-  
-  .orders-table th {
-    background-color: #f7f7f7;
-    font-weight: bold;
-  }
-  
-  .orders-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .delete-btn {
-    background-color: #e74c3c;
-    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 8px 10px; */
+    padding: 13px 8px;
+    text-align: right;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s ease;
+    border-bottom: 1px solid #eee;
   }
-  
-  .delete-btn:hover {
-    background-color: #c0392b;
+
+  .orders-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: left;
   }
-  
+
+  .orders-table td:last-child {
+    border-bottom: none;
+  }
+
   .orders-table ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 0;
+    list-style-type: none;
+    padding-left: 0;
   }
-  
+
+  .delete-btn {
+    width: 100%;
+    padding: 8px;
+  }
+}
+
+
+/* .my-orders-container {
+  padding: 2rem;
+  max-width: 90%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+.my-orders-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+.orders-table th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.orders-table ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+} */
