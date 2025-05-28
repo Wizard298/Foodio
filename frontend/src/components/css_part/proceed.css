@@ -28,11 +28,11 @@
   gap: 10px;
 }
 
-.proceed-row input {
+/* .proceed-row input {
   flex: 1;
-}
+} */
 
-.proceed-username, .proceed-email {
+.proceed-username, .proceed-email, .proceed-row input {
   padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;

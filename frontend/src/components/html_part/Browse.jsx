@@ -78,16 +78,15 @@ function Browse({searchQuery}) {
       </div>
 
       {/* Results Count */}
-      <div style={{ marginBottom: "20px" }}>
+      {/* <div style={{ marginBottom: "20px" }}>
         {filteredItems.length} {categoryFilter === "all" ? "food" : categoryFilter} items found
-      </div>
+      </div> */}
 
-      {/* Results Grid */}
       {filteredItems.length === 0 ? (
         <h2 style={{ textAlign: "center" }}>No items found. Try a different search.</h2>
-    ) : (
+        ) : (
         <>
-            <h2 style={{ textAlign: "center" }}>{filteredItems.length} food items found!</h2>
+            <h2 style={{ textAlign: "center" }}>{filteredItems.length} {categoryFilter === "all" ? "food" : categoryFilter} items found!</h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}>
             {filteredItems.map((item) => (
                 <ProductCard

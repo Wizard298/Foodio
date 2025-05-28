@@ -103,7 +103,7 @@ function EditProfile() {
       <div className="profile-main">
         <h2>Edit Profile</h2>
         <form className="profile-card" onSubmit={handleSubmit}>
-          <div className="card-body">
+          <div className="profile-card-body">
             <table>
               <tbody>
                 <tr>
@@ -163,7 +163,7 @@ function EditProfile() {
                 </tr>
               </tbody>
             </table>
-            <button type="submit">Save Changes</button>
+            <button className="edit-profile-button" type="submit">Save Changes</button>
           </div>
         </form>
       </div>

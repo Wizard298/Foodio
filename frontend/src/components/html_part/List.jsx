@@ -2,7 +2,7 @@
 import React from 'react';
 import '../css_part/list.css';
 
-function List({ search, setSearch}) {
+function List() {
   return (
     <div className='list-part-comp'>
       <div className='list-category-comp'>
@@ -24,7 +24,7 @@ function List({ search, setSearch}) {
           type="search" 
           placeholder="Search for any items..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          // onChange={(e) => setSearch(e.target.value)}
         />
       </div>
     </div>

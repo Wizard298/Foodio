@@ -97,16 +97,20 @@ const Proceed = () => {
             placeholder="Email address"
             readOnly
           />
-          <input type="text" placeholder="Street" />
-          <div className="procced-row">
+          <div className="proceed-row">
+            <input type="text" placeholder="Street" />
+          </div>
+          <div className="proceed-row">
             <input type="text" placeholder="City" />
             <input type="text" placeholder="State" />
           </div>
-          <div className="procced-row">
+          <div className="proceed-row">
             <input type="text" placeholder="Zip code" />
             <input type="text" placeholder="Country" />
           </div>
-          <input type="text" placeholder="Phone" />
+          <div className="proceed-row">
+            <input type="text" placeholder="Phone" />
+          </div>
         </form>
       </div>
 

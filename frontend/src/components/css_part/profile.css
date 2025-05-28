@@ -128,6 +128,26 @@
     width: 80%;
 }
 
+.profile-card-body input{
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}   
+
+.edit-profile-button{
+    margin-top: 31px;
+    background-color: #454545;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 11px;
+    transition: background-color 0.3s;
+}
+
 .edit {
     position: absolute;
     color: #e7e7e8;
